@@ -24,6 +24,7 @@ int8_t _str_is_alpha(string*);
 int8_t _str_is_numeric(string*);
 int32_t _str_parse_i32(string*);
 int64_t _str_parse_i64(string*);
+void _str_free(string*);
 
 string _str_from_cstr(const char* src) {
     string str;
@@ -103,6 +104,10 @@ int64_t _str_parse_i64(string* str) {
         num += *(str->cstr + i) % 16;
     }
     return num;
+}
+
+void _str_free(string* str) {
+    free(str->cstr);
 }
 
 #endif//_STRING_
