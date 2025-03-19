@@ -1,5 +1,7 @@
 #include "string.h"
 
+#include <malloc.h>
+#include <memory.h>
 
 string _str_from_cstr(const char* src) {
     string str;

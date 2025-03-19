@@ -1,5 +1,8 @@
 #include "option.h"
 
+#include <memory.h>
+#include <malloc.h>
+
 option _opt_new(int8_t has_halue, uint16_t byte_len) {
     option opt;
     opt.has_value = has_halue;

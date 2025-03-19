@@ -1,5 +1,9 @@
 #include "vector.h"
 
+#include <memory.h>
+#include <malloc.h>
+#include <stdlib.h>
+
 vector _cvec_new(size_t byte_len) {
     vector vec;
     vec.byte_len = byte_len;
@@ -26,8 +30,6 @@ void _cvec_fill(vector* vec, const void* element) {
     }
 }
 void _cvec_clear(vector* vec) {
-    free(vec->start);
-    vec->start = NULL;
     vec->size = 0;
 }
 void _cvec_free(vector* vec) {
