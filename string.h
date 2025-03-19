@@ -19,25 +19,29 @@ string _str_from_cstr(const char*);
 void _str_push(string*, const char*);
 string _str_merge(string*, string*);
 string _str_slice(string*, uint64_t, uint64_t);
+char* _str_slice_to_cstr(string*, uint64_t, uint64_t);
+char* _str_cstr_slice_to_cstr(const char*, uint64_t, uint64_t);
 string _str_clone(string*);
-int8_t _str_is_alpha(string*);
-int8_t _str_is_numeric(string*);
+int8_t _str_is_alpha(string*); // bool
+int8_t _str_is_numeric(string*); // bool
 int32_t _str_parse_i32(string*);
 int64_t _str_parse_i64(string*);
 void _str_free(string*);
+uint64_t _str_size_cstr(const char*);
+int8_t _str_string_eql_string(string*, string*); // bool
+int8_t _str_string_eql_cstr(string*, const char*); // bool
+int8_t _str_cstr_eql_cstr(const char*, const char*); // bool
 
 string _str_from_cstr(const char* src) {
     string str;
-    str.len = 0;
-    while (src[str.len++] != 0) { }
+    str.len = _str_size_cstr(src);
     str.cstr = (char*) malloc(str.len);
     memcpy(str.cstr, src, str.len);
     return str;
 }
 
 void _str_push(string* dst, const char* src) {
-    uint64_t add_size = 0;
-    while (src[add_size++] != 0) { }
+    uint64_t add_size = _str_size_cstr(src);
     char* cp_buf = (char*)malloc(dst->len + add_size);
     memcpy(cp_buf, dst->cstr, dst->len);
     memcpy(cp_buf+dst->len-1, src, add_size);
@@ -57,11 +61,20 @@ string _str_merge(string* src1, string* src2) {
 
 string _str_slice(string* src, uint64_t l, uint64_t r) {
     string slice;
-    slice.cstr = (char*)malloc(r - l + 1);
     slice.len = r - l;
-    memcpy(slice.cstr, src->cstr+l, r - l);
-    slice.cstr[r-l] = 0;
+    slice.cstr = _str_cstr_slice_to_cstr(src->cstr, l, r);
     return slice;
+}
+
+char* _str_slice_to_cstr(string* src, uint64_t l, uint64_t r) {
+    return _str_cstr_slice_to_cstr(src->cstr, l, r);
+}
+
+char* _str_cstr_slice_to_cstr(const char* src, uint64_t l, uint64_t r) {
+    char* res = (char*) malloc(r - l);
+    memcpy(res, src + l, r - l);
+    res[r - l] = 0;
+    return res;
 }
 
 string _str_clone(string* src) {
@@ -70,7 +83,7 @@ string _str_clone(string* src) {
     memcpy(str.cstr, src->cstr, str.len);
     return str;
 }
-int8_t _str_is_alpha(string* str) { // bool
+int8_t _str_is_alpha(string* str) {
     for (uint64_t i = 0; i < str->len-1; ++i) {
         if (*(str->cstr + i) < 0x41 || *(str->cstr + i) > 0x7A) {
             return 0;
@@ -79,7 +92,7 @@ int8_t _str_is_alpha(string* str) { // bool
     return 1;
 }
 
-int8_t _str_is_numeric(string* str) { // bool
+int8_t _str_is_numeric(string* str) {
     for (uint64_t i = 0; i < str->len-1; ++i) {
         if (*(str->cstr + i) < 0x30 || *(str->cstr + i) > 0x39) {
             return 0;
@@ -108,6 +121,29 @@ int64_t _str_parse_i64(string* str) {
 
 void _str_free(string* str) {
     free(str->cstr);
+}
+
+uint64_t _str_size_cstr(const char* str) {
+    uint64_t i = 0;
+    while (str[i++] != 0) { }
+    return i;
+}
+
+int8_t _str_string_eql_string(string* s1, string* s2) {
+    if (s1->len != s2->len) return 0;
+    return _str_cstr_eql_cstr(s1->cstr, s2->cstr);
+}
+
+int8_t _str_string_eql_cstr(string* s1, const char* s2) {
+    return _str_cstr_eql_cstr(s1->cstr, s2);
+}
+
+int8_t _str_cstr_eql_cstr(const char* s1, const char* s2) {
+    for (uint64_t i = 0; ;++i) {
+        if (s1[i] != s2[i]) return 0;
+        if (s1[i] == 0 || s2[i] == 0) break;
+    }
+    return 1;
 }
 
 #endif//_STRING_
