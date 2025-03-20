@@ -3,6 +3,7 @@
 #include <memory.h>
 #include <malloc.h>
 #include <stdlib.h>
+#include <stddef.h>
 
 vector _cvec_new(size_t byte_len) {
     vector vec;

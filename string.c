@@ -32,7 +32,7 @@ string _str_merge(string* src1, string* src2) {
 
 string _str_slice(string* src, uint64_t l, uint64_t r) {
     string slice;
-    slice.len = r - l;
+    slice.len = r - l + 1;
     slice.cstr = _str_cstr_slice_to_cstr(src->cstr, l, r);
     return slice;
 }
@@ -42,7 +42,7 @@ char* _str_slice_to_cstr(string* src, uint64_t l, uint64_t r) {
 }
 
 char* _str_cstr_slice_to_cstr(const char* src, uint64_t l, uint64_t r) {
-    char* res = (char*) malloc(r - l);
+    char* res = (char*) malloc(r - l + 1);
     memcpy(res, src + l, r - l);
     res[r - l] = 0;
     return res;

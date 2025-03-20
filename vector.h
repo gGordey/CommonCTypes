@@ -1,6 +1,8 @@
 #ifndef _C_VECTOR_
 #define _C_VECTOR_
 
+#include <stddef.h>
+
 #define EXIT_INVALID_ALLOCATON 214
 // if you get this code, you kinda messed up. it can be from one of this functions:
 // _cvec_pop
