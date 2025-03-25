@@ -21,6 +21,10 @@ string _str_from_cstr(const char* src);
 void _str_push(string* str, const char* src);
 // pushes content from "src" to the end "str" 
 
+void _str_push_char(string* dst, const char ch);
+
+char* _str_reverse_cstr(const char* src);
+
 string _str_merge(string* src1, string* src2);
 // combines content from src1 and src2 to a new string
 
@@ -62,5 +66,8 @@ int8_t _str_string_eql_cstr(string* s1, const char* s2); // bool
 
 int8_t _str_cstr_eql_cstr(const char* s1, const char* s2); // bool
 // compares two cstr
+
+string _str_fstring(const char* format, ...);
+// allowes you to make formated string (just like in C with printf - %s, %c, %d ...)
 
 #endif//_STRING_
