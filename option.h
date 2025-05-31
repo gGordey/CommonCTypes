@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-typedef struct {
+typedef struct option {
     int8_t has_value; // bool
     // has_value telles is it "some" or "none"
     uint16_t byte_len;

@@ -164,7 +164,7 @@ string _str_fstring(const char* format, ...) {
         
         _str_push(&result, _str_cstr_slice_to_cstr(format, l, r));
         
-        if (format[r] == 0) 
+        if (format[r] == 0)
             break;
      
         switch (format[++r]) {

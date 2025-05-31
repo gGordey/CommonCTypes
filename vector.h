@@ -10,7 +10,7 @@
 // _cvec_remove
 // _cvec_insert
 
-typedef struct {
+typedef struct vector {
     size_t cap;
     // cap is how much elements can be placed in vector without reallocating it  
     size_t byte_len;

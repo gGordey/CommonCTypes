@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-typedef struct {
+typedef struct string{
     uint64_t len;
     // len is how long "cstr" is. cstr[len] = 0
     char* cstr;
