@@ -51,7 +51,6 @@ void _mat2_mult(mat2x2* _restrict m1, mat2x2* _restrict m2, mat2x2 *buf) {
 mat _mat_mult(mat* _restrict m1, mat* _restrict m2) {
     if (m1->size_y != m2->size_x) {
         exit(1);
-        return;
     }
 
     const int rows = m1->size_x;
@@ -65,7 +64,7 @@ mat _mat_mult(mat* _restrict m1, mat* _restrict m2) {
             for (int k = 0; k < inner; ++k) {
                 sum += (*_mat_index_data(m1, i, k)) * (*_mat_index_data(m2, k, j));
             }
-            *_mat_index_data(buf, i, j) = sum;
+            *_mat_index_data(&prod, i, j) = sum;
         }
     }
     return prod;
