@@ -10,7 +10,8 @@
 typedef float mat4x4[16];
 typedef float mat2x2[4];
 typedef struct mat {
-    int linear_size;
+    int size_x;
+    int size_y;
     float *data;
 } mat;
 
@@ -22,7 +23,8 @@ float* _mat_index_data(mat *mat, int x, int y);
 float* _mat4_index_data(mat4x4 *mat, int x, int y);
 float* _mat2_index_data(mat2x2 *mat, int x, int y);
 
-void _mat4_mult_mat(mat4x4* _restrict m1, mat4x4* _restrict m2, mat4x4 *buf);
-void _mat2_mult_mat(mat2x2* _restrict m1, mat2x2* _restrict m2, mat2x2 *buf);
+void _mat4_mult(mat4x4* _restrict m1, mat4x4* _restrict m2, mat4x4 *buf);
+void _mat2_mult(mat2x2* _restrict m1, mat2x2* _restrict m2, mat2x2 *buf);
+void _mat_mult(mat* _restrict m1, mat* _restrict m2, mat* buf);
 
 #endif//_C_MATRIX
