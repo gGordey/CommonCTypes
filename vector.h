@@ -6,7 +6,7 @@
 #ifdef _MSC_VER  
     typedef char *pvoid_t;
 #else
-    typedef void *pvoid_t
+    typedef void *pvoid_t;
 #endif
 
 #define EXIT_INVALID_ALLOCATON 214
