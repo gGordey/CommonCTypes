@@ -97,7 +97,7 @@ void _mat2_mult_vec(mat2x2* m,
 
     for (int i = 0; i < 2; ++i) {
         for (int j = 0; j < 2; ++j) {
-            sum[i] += (*_mat4_index_data(m, i, j)) * vec[j];
+            sum[i] += (*_mat2_index_data(m, i, j)) * vec[j];
         }
     }
     *destX = sum[0];
